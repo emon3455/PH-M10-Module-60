@@ -5,7 +5,6 @@ import { AuthContext } from '../Provider/AuthProvider';
 const Register = () => {
 
     const {user, createUser} = useContext(AuthContext);
-    console.log(createUser);
 
     const handleRegistration=(event)=>{
         event.preventDefault();
@@ -13,12 +12,12 @@ const Register = () => {
         const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
-        console.log(email,password);
 
         createUser(email,password)
         .then(result=>{
             const registerdUser = result.user;
             console.log(registerdUser);
+            form.reset();
         })
         .catch(error=>{
             console.log(error.message);
@@ -50,13 +49,14 @@ const Register = () => {
                             <span className="label-text">Password</span>
                         </label>
                         <input type="password" name='password' placeholder="password" className="input input-bordered" required/>
+                        <label className="label">
+                            <Link to="/login" className="label-text-alt link link-hover">Already Have an Account?</Link>
+                        </label>
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">Register</button>
                         </div>
-                        <label className="text-center">
-                            <Link to="/login" >Already Have an Account? <button className="btn btn-link">Click To Login</button> </Link>
-                        </label>
+                       
                     </div>
                 </form>
             </div>
